@@ -41,7 +41,9 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 
+    private static final String NO_FLASH_MSG = "no_flash_msg";
     private static final String TAP_TO_DISABLE = "tap_to_disable";
+    private static final String AUTO_START = "auto_start";
 
     private static final int DURATION = 1000; //ms
 
@@ -81,12 +83,21 @@ public class MainActivity extends Activity {
 
         IntentFilter filter = new IntentFilter(FlashDevice.TORCH_STATUS_CHANGED);
         sTorchChangedListener = new TorchModeChangedListener();
+        sHasFlash = Utils.deviceHasCameraFlash();
+
+        if(!sHasFlash) {
+            Utils.showMessageOnce(this, NO_FLASH_MSG, R.string.no_flash);
+        }
         registerReceiver(sTorchChangedListener, filter);
     }
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(sTorchChangedListener);
+        try {
+            unregisterReceiver(sTorchChangedListener);
+        } catch(RuntimeException e) {
+            // Listener not registered yet
+        }
         super.onDestroy();
     }
 
@@ -110,6 +121,13 @@ public class MainActivity extends Activity {
             sLightBulb = (ImageView) rootView.findViewById(R.id.torch_image);
             sLightBulb.setClickable(true);
             sLightBulb.setOnClickListener(sTorchClickListener);
+
+            Intent intent = ((MainActivity) sContext).getIntent();
+            if(intent.getExtras() != null) {
+                if(intent.getBooleanExtra(AUTO_START, false)) { // start on open
+                    sLightBulb.performClick();
+                }
+            }
             return rootView;
         }
     }
@@ -139,7 +157,6 @@ public class MainActivity extends Activity {
                 int mode = intent.getIntExtra(FlashDevice.TORCH_MODE, FlashDevice.OFF);
 
                 sTorchOn = mode == FlashDevice.ON;
-                sHasFlash = intent.getBooleanExtra(FlashDevice.HAS_FLASH, false);
                 float scale = sTorchOn ? measureScale() : 1f;
 
                 sTorchLight.animate().scaleX(scale).scaleY(scale).setDuration(DURATION);

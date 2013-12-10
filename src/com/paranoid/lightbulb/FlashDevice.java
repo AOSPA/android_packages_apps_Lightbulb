@@ -30,11 +30,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class FlashDevice {
 
-    private static final String NO_FLASH_MSG = "no_flash_msg";
-
     public static final String TORCH_STATUS_CHANGED = "TORCH_STATUS_CHANGED";
     public static final String TORCH_MODE = "TORCH_MODE";
-    public static final String HAS_FLASH = "HAS_FLASH";
 
     public static final int OFF = 0;
     public static final int ON = 1;
@@ -58,7 +55,6 @@ public class FlashDevice {
     }
 
     public synchronized void setFlashMode(final int mode) {
-        boolean hasFlash = true;
         try {
             mFlashMode = mode;
             if (mCamera == null) {
@@ -109,16 +105,13 @@ public class FlashDevice {
                 mCamera.setParameters(params);
             }
         } catch (RuntimeException e) { // no flash?
-            hasFlash = false;
             if (mCamera != null) {
                 mCamera.release();
             }
-            Utils.showMessageOnce(mContext, NO_FLASH_MSG, R.string.no_flash);
         }
         Intent i = new Intent();
         i.setAction(TORCH_STATUS_CHANGED);
         i.putExtra(TORCH_MODE, mode);
-        i.putExtra(HAS_FLASH, hasFlash);
         mContext.sendBroadcast(i);
     }
 

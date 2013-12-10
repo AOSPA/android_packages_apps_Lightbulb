@@ -20,8 +20,11 @@ package com.paranoid.lightbulb;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.Camera;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class Utils {
 
@@ -43,5 +46,30 @@ public class Utils {
             editor.putBoolean(messageId, true);
             editor.commit();
         }
+    }
+
+    public static boolean deviceHasCameraFlash() {
+        Camera camera = Camera.open();
+        if (camera == null) {
+            return false;
+        }
+
+        Camera.Parameters parameters = camera.getParameters();
+
+        if (parameters.getFlashMode() == null) {
+            camera.release();
+            return false;
+        }
+
+        List<String> supportedFlashModes = parameters.getSupportedFlashModes();
+        if (supportedFlashModes == null
+                || supportedFlashModes.isEmpty() || supportedFlashModes.size() == 1
+                && supportedFlashModes.get(0).equals(Camera.Parameters.FLASH_MODE_OFF)) {
+            camera.release();
+            return false;
+        }
+
+        camera.release();
+        return true;
     }
 }
