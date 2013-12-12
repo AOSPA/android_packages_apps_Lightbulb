@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 
     private static final String NO_FLASH_MSG = "no_flash_msg";
     private static final String TAP_TO_DISABLE = "tap_to_disable";
-    private static final String AUTO_START = "auto_start";
+    private static final String AUTO_START = "AUTO_START";
 
     private static final int DURATION = 1000; //ms
 
