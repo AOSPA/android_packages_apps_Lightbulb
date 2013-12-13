@@ -56,6 +56,8 @@ public class MainActivity extends Activity {
 
     private static float sOldBrightness;
 
+    private static TorchFragment lightBulbFragment; 
+    
     private static TorchModeChangedListener sTorchChangedListener;
 
     private static View.OnClickListener sTorchClickListener = new View.OnClickListener() {
@@ -76,14 +78,25 @@ public class MainActivity extends Activity {
         sContext = this;
 
         if (savedInstanceState == null) {
+            lightBulbFragment =  new TorchFragment();
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new TorchFragment())
+                    .add(R.id.container,lightBulbFragment)
                     .commit();
         }
+        
 
         IntentFilter filter = new IntentFilter(FlashDevice.TORCH_STATUS_CHANGED);
         sTorchChangedListener = new TorchModeChangedListener();
         sHasFlash = Utils.deviceHasCameraFlash();
+        
+        Intent intent = sContext.getIntent();
+        if(intent.getExtras() != null) {
+            if(intent.getBooleanExtra(AUTO_START, false)) { // start on open
+                if (lightBulbFragment != null) {
+                    lightBulbFragment.getView().findViewById(R.id.torch_image).performClick();
+                }
+            }
+        }
 
         if(!sHasFlash) {
             Utils.showMessageOnce(this, NO_FLASH_MSG, R.string.no_flash);
@@ -121,7 +134,6 @@ public class MainActivity extends Activity {
             sLightBulb = (ImageView) rootView.findViewById(R.id.torch_image);
             sLightBulb.setClickable(true);
             sLightBulb.setOnClickListener(sTorchClickListener);
-
 
             return rootView;
         }
