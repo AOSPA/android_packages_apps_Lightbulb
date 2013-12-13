@@ -122,12 +122,7 @@ public class MainActivity extends Activity {
             sLightBulb.setClickable(true);
             sLightBulb.setOnClickListener(sTorchClickListener);
 
-            Intent intent = ((MainActivity) sContext).getIntent();
-            if(intent.getExtras() != null) {
-                if(intent.getBooleanExtra(AUTO_START, false)) { // start on open
-                    sLightBulb.performClick();
-                }
-            }
+
             return rootView;
         }
     }
