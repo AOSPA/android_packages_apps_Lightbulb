@@ -17,7 +17,7 @@
 -->
 <resources>
     <string name="app_name">Lightbulb</string>
-    <string name="no_flash">Il tuo dispositivo non supporta la torcia LED. Lo schermo bianco diventerà un\'alternativa.</string>
+    <string name="no_flash">La fotocamera del tuo dispositivo non è provvista di flash LED. Lo schermo diventerà bianco in alternativa.</string>
     <string name="tap_to_disable">Tocca un punto qualsiasi dello schermo per disattivare la torcia.</string>
     <string name="torch_enabled">Lightbulb attivo</string>
     <string name="tap_to_turn_off">Tocca per spegnere</string>
