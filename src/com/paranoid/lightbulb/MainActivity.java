@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
 
         IntentFilter filter = new IntentFilter(FlashDevice.TORCH_STATUS_CHANGED);
         sTorchChangedListener = new TorchModeChangedListener();
-        sHasFlash = Utils.deviceHasCameraFlash();
+        sHasFlash = Utils.deviceHasCameraFlash(sContext);
 
         if(!sHasFlash) {
             Utils.showMessageOnce(this, NO_FLASH_MSG, R.string.no_flash);

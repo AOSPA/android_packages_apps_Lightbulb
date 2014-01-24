@@ -55,59 +55,63 @@ public class FlashDevice {
     }
 
     public synchronized void setFlashMode(final int mode) {
-        try {
-            mFlashMode = mode;
-            if (mCamera == null) {
-                mCamera = Camera.open();
-            }
-            if (mode == OFF) {
-                Camera.Parameters params = mCamera.getParameters();
-                params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                mCamera.setParameters(params);
-                mCamera.stopPreview();
-                mCamera.release();
-                mCamera = null;
-                mSurfaceCreated = false;
-            } else {
-                if (!mSurfaceCreated) {
-                    int[] textures = new int[1];
-                    // generate one texture pointer and bind it as an
-                    // external texture.
-                    GLES20.glGenTextures(1, textures, 0);
-                    GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                            textures[0]);
-                    // No mip-mapping with camera source.
-                    GLES20.glTexParameterf(
-                            GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                            GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
-                    GLES20.glTexParameterf(
-                            GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                            GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-                    // Clamp to edge is only option.
-                    GLES20.glTexParameteri(
-                            GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                            GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
-                    GLES20.glTexParameteri(
-                            GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                            GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
-
-                    SurfaceTexture surfaceTexture = new SurfaceTexture(textures[0]);
-                    try {
-                        mCamera.setPreviewTexture(surfaceTexture);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    mSurfaceCreated = true;
-                    mCamera.startPreview();
+        if (Utils.deviceHasCameraFlash(mContext)) {
+            try {
+                mFlashMode = mode;
+                if (mCamera == null) {
+                    mCamera = Camera.open();
                 }
-                Camera.Parameters params = mCamera.getParameters();
-                params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-                mCamera.setParameters(params);
+                if (mode == OFF) {
+                    Camera.Parameters params = mCamera.getParameters();
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                    mCamera.setParameters(params);
+                    mCamera.stopPreview();
+                    mCamera.release();
+                    mCamera = null;
+                    mSurfaceCreated = false;
+                } else {
+                    if (!mSurfaceCreated) {
+                        int[] textures = new int[1];
+                        // generate one texture pointer and bind it as an
+                        // external texture.
+                        GLES20.glGenTextures(1, textures, 0);
+                        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                textures[0]);
+                        // No mip-mapping with camera source.
+                        GLES20.glTexParameterf(
+                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
+                        GLES20.glTexParameterf(
+                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+                        // Clamp to edge is only option.
+                        GLES20.glTexParameteri(
+                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
+                        GLES20.glTexParameteri(
+                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
+
+                        SurfaceTexture surfaceTexture = new SurfaceTexture(textures[0]);
+                        try {
+                            mCamera.setPreviewTexture(surfaceTexture);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mSurfaceCreated = true;
+                        mCamera.startPreview();
+                    }
+                    Camera.Parameters params = mCamera.getParameters();
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    mCamera.setParameters(params);
+                }
+            } catch (RuntimeException e) { // no flash?
+                if (mCamera != null) {
+                    mCamera.release();
+                }
             }
-        } catch (RuntimeException e) { // no flash?
-            if (mCamera != null) {
-                mCamera.release();
-            }
+        } else {
+            mFlashMode = mode;
         }
         Intent i = new Intent();
         i.setAction(TORCH_STATUS_CHANGED);

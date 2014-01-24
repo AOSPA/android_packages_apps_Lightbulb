@@ -48,28 +48,7 @@ public class Utils {
         }
     }
 
-    public static boolean deviceHasCameraFlash() {
-        Camera camera = Camera.open();
-        if (camera == null) {
-            return false;
-        }
-
-        Camera.Parameters parameters = camera.getParameters();
-
-        if (parameters.getFlashMode() == null) {
-            camera.release();
-            return false;
-        }
-
-        List<String> supportedFlashModes = parameters.getSupportedFlashModes();
-        if (supportedFlashModes == null
-                || supportedFlashModes.isEmpty() || supportedFlashModes.size() == 1
-                && supportedFlashModes.get(0).equals(Camera.Parameters.FLASH_MODE_OFF)) {
-            camera.release();
-            return false;
-        }
-
-        camera.release();
-        return true;
+    public static boolean deviceHasCameraFlash(Context context) {
+        return context.getResources().getBoolean(R.bool.camera_has_flash);
     }
 }
