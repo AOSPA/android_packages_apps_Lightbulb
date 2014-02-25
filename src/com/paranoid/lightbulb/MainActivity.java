@@ -58,6 +58,8 @@ public class MainActivity extends Activity {
 
     private static TorchModeChangedListener sTorchChangedListener;
 
+    private static LightbulbWidgetProvider sWidgetProvider;
+
     private static View.OnClickListener sTorchClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -87,6 +89,12 @@ public class MainActivity extends Activity {
 
         if(!sHasFlash) {
             Utils.showMessageOnce(this, NO_FLASH_MSG, R.string.no_flash);
+        } else {
+            synchronized (this) {
+                if (sWidgetProvider == null) {
+                    sWidgetProvider = new LightbulbWidgetProvider();
+                }
+            }
         }
         registerReceiver(sTorchChangedListener, filter);
     }
@@ -97,6 +105,9 @@ public class MainActivity extends Activity {
             unregisterReceiver(sTorchChangedListener);
         } catch(RuntimeException e) {
             // Listener not registered yet
+        }
+        if (sWidgetProvider != null) {
+            sWidgetProvider.update(this);
         }
         super.onDestroy();
     }
@@ -140,7 +151,18 @@ public class MainActivity extends Activity {
             sTorchOn = false;
             setTorchLighScale();
         }
+        if (sWidgetProvider != null) {
+            sWidgetProvider.update(this);
+        }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (sWidgetProvider != null) {
+            sWidgetProvider.update(this);
+        }
+        super.onResume();
     }
 
     @Override
