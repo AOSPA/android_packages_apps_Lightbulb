@@ -20,9 +20,11 @@ package com.paranoid.lightbulb;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -58,6 +60,8 @@ public class MainActivity extends Activity {
 
     private static TorchModeChangedListener sTorchChangedListener;
 
+    private static LightbulbWidgetProvider sWidgetProvider;
+
     private static View.OnClickListener sTorchClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -87,6 +91,18 @@ public class MainActivity extends Activity {
 
         if(!sHasFlash) {
             Utils.showMessageOnce(this, NO_FLASH_MSG, R.string.no_flash);
+
+            ComponentName componentName = new ComponentName(this, LightbulbWidgetProvider.class);
+            PackageManager packageManager = getApplicationContext().getPackageManager();
+            packageManager.setComponentEnabledSetting(componentName,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
+        } else {
+            synchronized (this) {
+                if (sWidgetProvider == null) {
+                    sWidgetProvider = new LightbulbWidgetProvider();
+                }
+            }
         }
         registerReceiver(sTorchChangedListener, filter);
     }
@@ -97,6 +113,9 @@ public class MainActivity extends Activity {
             unregisterReceiver(sTorchChangedListener);
         } catch(RuntimeException e) {
             // Listener not registered yet
+        }
+        if (sWidgetProvider != null) {
+            sWidgetProvider.update(this);
         }
         super.onDestroy();
     }
@@ -140,7 +159,18 @@ public class MainActivity extends Activity {
             sTorchOn = false;
             setTorchLighScale();
         }
+        if (sWidgetProvider != null) {
+            sWidgetProvider.update(this);
+        }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (sWidgetProvider != null) {
+            sWidgetProvider.update(this);
+        }
+        super.onResume();
     }
 
     @Override
