@@ -17,8 +17,8 @@
 -->
 <resources>
     <string name="app_name">Lightbulb</string>
-    <string name="no_flash">Votre appareil ne supporte pas le flash LED. L/'écran va devenir blanc comme alternative</string>
-    <string name="tap_to_disable">Appuyer n'importe où sur l/'écran pour désactiver la torche</string>
+    <string name="no_flash">Votre appareil ne supporte pas le flash LED. L\'écran va devenir blanc comme alternative</string>
+    <string name="tap_to_disable">Appuyer n'importe où sur l\'écran pour désactiver la torche</string>
     <string name="torch_enabled">Lightbulb activer</string>
     <string name="tap_to_turn_off">Toucher pour désactiver</string>
 </resources>
