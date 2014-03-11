@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2013 ParanoidAndroid Project
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <string name="app_name">手电筒</string>
+    <string name="no_flash">你的设备不支持LED闪光灯。屏幕将显示白色来照明。</string>
+    <string name="tap_to_disable">点击屏幕任何位置可禁用手电筒</string>
+    <string name="torch_enabled">手电筒开启</string>
+    <string name="tap_to_turn_off">触摸可关闭</string>
+</resources>
