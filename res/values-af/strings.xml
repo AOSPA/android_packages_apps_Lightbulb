@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">Gloeilamp</string>
+  <string name="no_flash">U toestel ondersteun nie \'n LED flitslig nie. As alternatief sal die skerm se kleur verander na wit</string>
+  <string name="tap_to_disable">Raak enige plek op die skerm om die flitslig af te skakel</string>
+  <string name="torch_enabled">Gloeilamp aan</string>
+  <string name="tap_to_turn_off">Raak aan skerm om af te sit</string>
 </resources>

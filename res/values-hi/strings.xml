@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">टॉर्च</string>
+  <string name="no_flash">आपका डिवाइस एलईडी टॉर्च का समर्थन नहीं करता। स्क्रीन एक विकल्प के रूप में सफेद बन जाएगा</string>
+  <string name="tap_to_disable">टाॅर्च बन्द करने के लिये स्क्रीन पर किसी भी जगह दबाएँ</string>
+  <string name="torch_enabled">टोर्च चालू</string>
+  <string name="tap_to_turn_off">बन्द करने के लिए टच करें </string>
 </resources>
