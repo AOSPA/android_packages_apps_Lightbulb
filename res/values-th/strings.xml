@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">ไฟฉาย</string>
+  <string name="no_flash">เครื่องของคุณไม่มีหลอดไฟ LED สำหรับใช้เป็นไฟฉาย ดังนั้นระบบจะให้จอภาพส่องสว่างแทน</string>
+  <string name="tap_to_disable">แตะที่ใดก็ได้บนจอเพื่อปิดไฟฉาย</string>
+  <string name="torch_enabled">ไฟฉายเปิด</string>
+  <string name="tap_to_turn_off">แตะเพื่อปิดไฟ</string>
 </resources>

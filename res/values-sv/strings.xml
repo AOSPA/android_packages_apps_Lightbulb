@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">Glödlampa</string>
+  <string name="no_flash">Din enhet stödjer inte LED-ficklampa. Skärmen kommer istället att bli vit</string>
+  <string name="tap_to_disable">Tryck var som helst på skärmen för att släcka ficklampan</string>
+  <string name="torch_enabled">Glödlampa aktiverad</string>
+  <string name="tap_to_turn_off">Tryck för att stänga av</string>
 </resources>

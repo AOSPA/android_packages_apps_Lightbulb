@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">Lommelykt</string>
+  <string name="no_flash">Enheten din støtter ikke LED lys. Skjermen vil bli hvit som et alternativ</string>
+  <string name="tap_to_disable">Trykk hvor som helst på skjermen for å skru av lommelykten</string>
+  <string name="torch_enabled">Lommelykt på</string>
+  <string name="tap_to_turn_off">Trykk for å skru av</string>
 </resources>

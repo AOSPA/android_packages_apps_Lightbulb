@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">手電筒</string>
+  <string name="no_flash">您的設備不支援 LED 手電筒。螢幕會變成白色作為替代</string>
+  <string name="tap_to_disable">點擊螢幕的任何地方以關閉手電筒。</string>
+  <string name="torch_enabled">手電筒已開啟</string>
+  <string name="tap_to_turn_off">觸碰以關閉</string>
 </resources>

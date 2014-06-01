@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">Сијалица</string>
+  <string name="no_flash">Ваш уређај не поседује ЛЕД блиц. Као алтернатива екран ће постати бео</string>
+  <string name="tap_to_disable">Притисните било где на екрану да искључите сијалицу</string>
+  <string name="torch_enabled">Сијалица укључена</string>
+  <string name="tap_to_turn_off">Притисни да искључиш</string>
 </resources>

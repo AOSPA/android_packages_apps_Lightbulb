@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Taschenlampe</string>
-  <string name="no_flash">Dieses Gerät unterstützt die LED Taschenlampe nicht. Als Alternative wird der Bildschirm weiß</string>
-  <string name="tap_to_disable">Berühre den Bildschirm an einer beliebigen Stelle um die Taschenlampe auszuschalten</string>
-  <string name="torch_enabled">Taschenlampe an</string>
-  <string name="tap_to_turn_off">Berühren zum Ausschalten</string>
+  <string name="app_name">Zaklamp</string>
+  <string name="no_flash">Uw apparaat ondersteunt geen LED zaklamp. Het scherm zal wit worden als alternatief</string>
+  <string name="tap_to_disable">Tik ergens op het scherm om de zaklamp uit te schakelen</string>
+  <string name="torch_enabled">Zaklamp aan</string>
+  <string name="tap_to_turn_off">Aanraken om uit te schakelen</string>
 </resources>
