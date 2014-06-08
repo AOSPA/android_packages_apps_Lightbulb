@@ -20,6 +20,6 @@
   <string name="app_name">Φακός</string>
   <string name="no_flash">Η συσκευή σας δεν υποστηρίζει φακό LED. Η oθόνη θα γίνει λευκή ως εναλλακτική λύση</string>
   <string name="tap_to_disable">Πατήστε οπουδήποτε στην οθόνη για να απενεργοποιήσετε το φακό</string>
-  <string name="torch_enabled">Ενεργοποίηση φακού</string>
+  <string name="torch_enabled">Φακός ανοιχτός</string>
   <string name="tap_to_turn_off">Πατήστε για απενεργοποίηση</string>
 </resources>
