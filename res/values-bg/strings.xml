@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Zseblámpa</string>
-  <string name="no_flash">Az eszköze nem támogatja a LED vakut. A képernyő fehérre vált helyette.</string>
-  <string name="tap_to_disable">Érintse meg bárhol a kijelzőt a lámpa kikapcsolásához</string>
-  <string name="torch_enabled">Zseblámpa be</string>
-  <string name="tap_to_turn_off">Érintse meg a kikapcsoláshoz</string>
+  <string name="app_name">Фенерче</string>
+  <string name="no_flash">Устройството ви не поддържа функцията фенерче. За сметка на това, екрана ще стане бял.</string>
+  <string name="tap_to_disable">Докосни екрана за да изключиш фенерчето</string>
+  <string name="torch_enabled">Фенерче пуснато</string>
+  <string name="tap_to_turn_off">Докосни за да изключиш</string>
 </resources>

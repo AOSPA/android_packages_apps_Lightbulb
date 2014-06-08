@@ -18,7 +18,7 @@
 -->
 <resources>
   <string name="app_name">Taskulamppu</string>
-  <string name="no_flash">Laitteesi ei tue LED-taskulamppua. Näyttö muuttuu valkoiseksi</string>
+  <string name="no_flash">Laitteesi ei tue LED-taskulamppua. Näyttösi muuttuu valkoiseksi</string>
   <string name="tap_to_disable">Kosketa näyttöä sammuttaaksesi lampun</string>
   <string name="torch_enabled">Taskulamppu päällä</string>
   <string name="tap_to_turn_off">Kosketa sammuttaaksesi</string>

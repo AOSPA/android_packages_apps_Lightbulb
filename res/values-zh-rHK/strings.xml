@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Zseblámpa</string>
-  <string name="no_flash">Az eszköze nem támogatja a LED vakut. A képernyő fehérre vált helyette.</string>
-  <string name="tap_to_disable">Érintse meg bárhol a kijelzőt a lámpa kikapcsolásához</string>
-  <string name="torch_enabled">Zseblámpa be</string>
-  <string name="tap_to_turn_off">Érintse meg a kikapcsoláshoz</string>
+  <string name="app_name">電筒</string>
+  <string name="no_flash">您的裝置不支援 LED 電筒。螢幕會變成白色作為取代</string>
+  <string name="tap_to_disable">點擊螢幕以關閉電筒。</string>
+  <string name="torch_enabled">電筒已開啟</string>
+  <string name="tap_to_turn_off">觸碰以關閉電筒</string>
 </resources>
