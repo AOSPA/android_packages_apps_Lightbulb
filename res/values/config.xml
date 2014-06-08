@@ -18,4 +18,10 @@
 <resources>
     <!-- Camera flash (App) -->
     <bool name="camera_has_flash">false</bool>
+
+    <!-- If there is no sysfs-based control mechanism, enable this -->
+    <bool name="useCameraInterface">true</bool>
+
+    <!-- Full path to the sysfs toggle -->
+    <string name="flashDevice">/sys/class/leds/flashlight/brightness</string>
 </resources>

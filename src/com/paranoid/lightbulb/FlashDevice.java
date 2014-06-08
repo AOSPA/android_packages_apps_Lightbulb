@@ -24,6 +24,7 @@ import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -36,6 +37,10 @@ public class FlashDevice {
     public static final int OFF = 0;
     public static final int ON = 1;
 
+    private static boolean mUseCameraInterface;
+    private static String mFlashDevice;
+    private FileWriter mFlashDeviceWriter = null;
+
     private static FlashDevice sInstance;
 
     private boolean mSurfaceCreated = false;
@@ -44,6 +49,8 @@ public class FlashDevice {
     private Context mContext;
 
     private FlashDevice(Context context) {
+        mUseCameraInterface = context.getResources().getBoolean(R.bool.useCameraInterface);
+        mFlashDevice = context.getResources().getString(R.string.flashDevice);
         mContext = context;
     }
 
@@ -58,54 +65,69 @@ public class FlashDevice {
         if (Utils.deviceHasCameraFlash(mContext)) {
             try {
                 mFlashMode = mode;
-                if (mCamera == null) {
-                    mCamera = Camera.open();
-                }
-                if (mode == OFF) {
-                    Camera.Parameters params = mCamera.getParameters();
-                    params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                    mCamera.setParameters(params);
-                    mCamera.stopPreview();
-                    mCamera.release();
-                    mCamera = null;
-                    mSurfaceCreated = false;
-                } else {
-                    if (!mSurfaceCreated) {
-                        int[] textures = new int[1];
-                        // generate one texture pointer and bind it as an
-                        // external texture.
-                        GLES20.glGenTextures(1, textures, 0);
-                        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                                textures[0]);
-                        // No mip-mapping with camera source.
-                        GLES20.glTexParameterf(
-                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                                GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
-                        GLES20.glTexParameterf(
-                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                                GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-                        // Clamp to edge is only option.
-                        GLES20.glTexParameteri(
-                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                                GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
-                        GLES20.glTexParameteri(
-                                GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                                GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
-
-                        SurfaceTexture surfaceTexture = new SurfaceTexture(textures[0]);
-                        try {
-                            mCamera.setPreviewTexture(surfaceTexture);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        mSurfaceCreated = true;
-                        mCamera.startPreview();
+                if (mUseCameraInterface) {
+                    if (mCamera == null) {
+                        mCamera = Camera.open();
                     }
-                    Camera.Parameters params = mCamera.getParameters();
-                    params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-                    mCamera.setParameters(params);
+                    if (mode == OFF) {
+                        Camera.Parameters params = mCamera.getParameters();
+                        params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                        mCamera.setParameters(params);
+                        mCamera.stopPreview();
+                        mCamera.release();
+                        mCamera = null;
+                        mSurfaceCreated = false;
+                    } else {
+                        if (!mSurfaceCreated) {
+                            int[] textures = new int[1];
+                            // generate one texture pointer and bind it as an
+                            // external texture.
+                            GLES20.glGenTextures(1, textures, 0);
+                            GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                    textures[0]);
+                            // No mip-mapping with camera source.
+                            GLES20.glTexParameterf(
+                                    GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                    GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
+                            GLES20.glTexParameterf(
+                                    GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                    GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+                            // Clamp to edge is only option.
+                            GLES20.glTexParameteri(
+                                    GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                    GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
+                            GLES20.glTexParameteri(
+                                    GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
+                                    GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
+
+                            SurfaceTexture surfaceTexture = new SurfaceTexture(textures[0]);
+                            try {
+                                mCamera.setPreviewTexture(surfaceTexture);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            mSurfaceCreated = true;
+                            mCamera.startPreview();
+                        }
+                        Camera.Parameters params = mCamera.getParameters();
+                        params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                        mCamera.setParameters(params);
+                    }
+                } else {
+                    // Devices with sysfs toggle
+                    if (mFlashDeviceWriter == null) {
+                        mFlashDeviceWriter = new FileWriter(mFlashDevice);
+                    }
+                    if (mode == OFF) {
+                        mFlashDeviceWriter.write(String.valueOf(0));
+                        mFlashDeviceWriter.close();
+                        mFlashDeviceWriter = null;
+                    } else {
+                        mFlashDeviceWriter.write(String.valueOf(1));
+                        mFlashDeviceWriter.flush();
+                    }
                 }
-            } catch (RuntimeException e) { // no flash?
+            } catch (IOException e) { // no flash?
                 if (mCamera != null) {
                     mCamera.release();
                 }
