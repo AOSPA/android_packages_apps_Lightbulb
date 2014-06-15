@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">Linterna</string>
-  <string name="no_flash">Tu dispositivo no tiene linterna LED. La pantalla se volverá blanca como alternativa</string>
-  <string name="tap_to_disable">Toque en cualquier lugar de la pantalla para desactivar la linterna</string>
-  <string name="torch_enabled">Linterna encendida</string>
-  <string name="tap_to_turn_off">Toca para apagar</string>
+  <string name="app_name">Svetilka</string>
+  <string name="no_flash">Tvoja naprava ne podpira LED svetilke. Zato bo ekran naprave uporabljen kot svetilka</string>
+  <string name="tap_to_disable">Za izklop svetilke, se kjerkoli dotaknite ekrana</string>
+  <string name="torch_enabled">Svetilka je vklopljena</string>
+  <string name="tap_to_turn_off">Z dotikom ugasneš svetilko</string>
 </resources>

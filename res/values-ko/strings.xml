@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-  <string name="app_name">플래시</string>
-  <string name="no_flash">기기가 LED 플래시라이트를 지원하지 않습니다. 화면이 대신하여 밝아질 것입니다.</string>
-  <string name="tap_to_disable">플래시를 끄기 위해 아무 곳이나 터치하십시오.</string>
-  <string name="torch_enabled">플래시 켜짐</string>
-  <string name="tap_to_turn_off">터치하여 플래시 끄기</string>
+  <string name="app_name">손전등</string>
+  <string name="no_flash">기기가 LED 플래시라이트를 지원하지 않습니다. 대신 화면을 밝게 할 것입니다.</string>
+  <string name="tap_to_disable">손전등을 끄려면 아무데나 터치하십시오.</string>
+  <string name="torch_enabled">손전등 켜짐</string>
+  <string name="tap_to_turn_off">터치하여 손전등 끄기</string>
 </resources>

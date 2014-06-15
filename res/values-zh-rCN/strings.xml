@@ -18,7 +18,7 @@
 -->
 <resources>
   <string name="app_name">手电筒</string>
-  <string name="no_flash">设备不支持 LED 闪光灯, 屏幕将显示白色来照明</string>
+  <string name="no_flash">此设备不支持 LED 闪光灯，屏幕将显示白色来照明</string>
   <string name="tap_to_disable">点击屏幕任何区域以关闭手电筒</string>
   <string name="torch_enabled">手电筒已开启</string>
   <string name="tap_to_turn_off">触摸以关闭手电筒</string>
