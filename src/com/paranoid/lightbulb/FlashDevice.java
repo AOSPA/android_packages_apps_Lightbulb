@@ -23,6 +23,7 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
+import android.util.Log;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,6 +32,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class FlashDevice {
 
+    public static final String LOG_TAG = FlashDevice.class.getSimpleName();
     public static final String TORCH_STATUS_CHANGED = "TORCH_STATUS_CHANGED";
     public static final String TORCH_MODE = "TORCH_MODE";
 
@@ -130,6 +132,18 @@ public class FlashDevice {
             } catch (IOException e) { // no flash?
                 if (mCamera != null) {
                     mCamera.release();
+                }
+
+                if (!mUseCameraInterface) {
+                    // this probably means someone is using a custom kernel, oh no
+                    // them kernel developerses must look at https://github.com/AOSPA/android_device_lge_hammerhead/commit/26fde48a0964613eceb7ec73b8b7536c0223ce20
+                    Log.w(LOG_TAG, "Lightbulb is falling back to the interface. If you are on a custom kernel, contact your kernel developer for sysfs support.", e);
+                    mUseCameraInterface = true;
+                    setFlashMode(mode);
+                    return;
+                } else {
+                    // this is much worse - the legacy method failed
+                    Log.w(LOG_TAG, "Lightbulb was not able to switch modes (no fallback is available).", e);
                 }
             }
         } else {
