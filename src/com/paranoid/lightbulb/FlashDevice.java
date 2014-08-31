@@ -23,6 +23,7 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
+import android.util.Log;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,6 +32,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class FlashDevice {
 
+    public static final String LOG_TAG = "Lightbulb";
     public static final String TORCH_STATUS_CHANGED = "TORCH_STATUS_CHANGED";
     public static final String TORCH_MODE = "TORCH_MODE";
 
@@ -130,6 +132,19 @@ public class FlashDevice {
             } catch (IOException e) { // no flash?
                 if (mCamera != null) {
                     mCamera.release();
+                }
+
+                if (!mUseCameraInterface) {
+                    // this probably means someone is using a custom kernel, oh no
+                    // them kernel developerses should read the commit message here (git blame)
+                    Log.i(LOG_TAG, "Missing sysfs support from the kernel side. " +
+                            "Falling back to the interface.", e);
+                    mUseCameraInterface = true;
+                    setFlashMode(mode);
+                    return;
+                } else {
+                    // this is much worse - the legacy method failed
+                    Log.w(LOG_TAG, "Unable to switch modes (no fallback is available).", e);
                 }
             }
         } else {
